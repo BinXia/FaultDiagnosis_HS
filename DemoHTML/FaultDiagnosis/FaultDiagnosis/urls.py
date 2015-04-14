@@ -6,6 +6,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'FaultDiagnosis.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^$', include('Homepage.urls', namespace="Homepage")),
+    # url(r'^$', include('Homepage.urls', namespace="Homepage")),
+    url(r'^HealthPrediction/', include('Status.urls', namespace="Status")),
 
 )

@@ -11,7 +11,7 @@ class Sensor(models.Model):
 	# 2
 	RegulatorOutput_2 = models.FloatField(default=0);
 	# 3
-	ElectroHydraulicFeedback_3 = models.IntegerField(default=0);
+	ElectroHydraulicFeedback_3 = models.FloatField(default=0);
 	# 4
 	Leakage_4 = models.FloatField(default=0);
 	# 5
@@ -21,48 +21,94 @@ class Sensor(models.Model):
 	# 7
 	OilPumpCurrent_7 = models.FloatField(default=0);
 	# 8
-	OilExtractionValve_8 = models.BooleanField(default=True);
+	OilNormalLevel_8 = models.IntegerField(default=0);
 	# 9
-	ConditioningSignal_9 = models.FloatField(default=0);
+	OilPumpOne_9 = models.FloatField(default=0);
 	# 10
-	PIDLoad_10 = models.FloatField(default=0);
+	OilPumpTwo_10 = models.FloatField(default=0);
 	# 11
-	ParallelLoad_11 = models.FloatField(default=0);
+	OilMachineStatus_11 = models.IntegerField(default=0);
 	# 12
-	HaltStatus_12 = models.BooleanField(default=True);
+	OilMachineCurrent_12 = models.FloatField(default=0);
 	# 13
-	BalancedDashboard_13 = models.FloatField(default=0);
+	OilExtractionValve_13 = models.BooleanField(default=True);
 	# 14
-	RefuseSwitch_14 = models.BooleanField(default=True);
+	PIDLoad_14 = models.FloatField(default=0);
 	# 15
-	OilLevel_15 = models.FloatField(default=0);
+	ParallelLoad_15 = models.FloatField(default=0);
 	# 16
-	FlowSensor_16 = models.FloatField(default=0);
+	HaltStatus_16 = models.BooleanField(default=True);
 	# 17
-	OilPumpLoad_17 = models.FloatField(default=0);
+	BalancedDashboard_17 = models.FloatField(default=0);
 	# 18
-	OilPumpHalt_18 = models.BooleanField(default=True);
+	OilLevel_18 = models.FloatField(default=0);
 	# 19
-	OilFlow_19 = models.FloatField(default=0);
+	OilPumpLoad_19 = models.FloatField(default=0);
 	# 20
-	DischargeTime_20 = models.FloatField(default=0);
+	OilPumpHalt_20 = models.BooleanField(default=True);
 	# 21
-	SoftLauncherStatus_21 = models.FloatField(default=0);
+	OilFlow_21 = models.FloatField(default=0);
 	# 22
-	OilPump3current_22 = models.FloatField(default=0);
+	DischargeTime_22 = models.FloatField(default=0);
 	# 23
-	OilPump3Voltage_23 = models.FloatField(default=0);
+	SoftLauncherStatus_23 = models.FloatField(default=0);
 	# 24
-	ParallelWorkingCondition_24 = models.BooleanField(default=True);
+	OilPump3current_24 = models.FloatField(default=0);
 	# 25
-	EmergencySignal_25 = models.BooleanField(default=True);
+	OilPump3Voltage_25 = models.FloatField(default=0);
 	# 26
-	TurbidWaterSignal_26 = models.FloatField(default=0);
+	ParallelWorkingCondition_26 = models.BooleanField(default=True);
 	# 27
-	ImpurityParticlesSignal_27 = models.FloatField(default=0);
+	LeafServomotorFeedback_27 = models.FloatField(default=0);
 	# 28
-	ElectroHydraulicCurrent_28 = models.FloatField(default=0);
+	EmergencySignal_28 = models.BooleanField(default=True);
+	# 29
+	TurbidWaterSignal_29 = models.FloatField(default=0);
+	# 30
+	ImpurityParticlesSignal_30 = models.FloatField(default=0);
+	# 31
+	LeakBoxOilLevel_31 = models.FloatField(default=0);
+	# 32
+	MainRefuseOperation_32 = models.FloatField(default=0);
 
 	def __unicode__(self):              # __unicode__ on Python 2
 		return self.PublicationDate;
-		
+
+
+
+class Prediction(models.Model):
+	# 0
+	PublicationDate = models.DateTimeField('date published');
+	# 1
+	FenDuanGuanBiZhuangZhi_1 = models.BooleanField(default=True);
+	# 2
+	JieLiQiFanKui_2 = models.BooleanField(default=True);
+	# 3
+	ShiGuPeiYaFa_3 = models.BooleanField(default=True);
+	# 4
+	YouBengDianJi_4 = models.BooleanField(default=True);
+	# 5
+	ZhuPeiYaFa_5 = models.BooleanField(default=True);
+	# 6
+	ZhuJieLiQi_6 = models.BooleanField(default=True);
+	# 7
+	YouZhiWuRan_7 = models.BooleanField(default=True);
+	# 8
+	WuYouDianZhuan_8 = models.BooleanField(default=True);
+	# 9
+	YinDaoFa_9 = models.BooleanField(default=True);
+	# 10
+	ZuHeFa_10 = models.BooleanField(default=True);
+	# 11
+	YouBeng_11 = models.BooleanField(default=True);
+
+
+class Log(models.Model):
+	# 0
+	PublicationDate = models.DateTimeField('date published');
+	# 1
+	LogInformation = models.TextField(default="");
+
+
+
+
