@@ -92,15 +92,31 @@
           <div id="searchArea">
             <label for="query_start">查询起始时间：</label><input id="query_start" type="text"/>
             <label for="query_end">&nbsp;&nbsp;&nbsp;查询截止时间：</label><input id="query_end" type="text"/>
-            <button id="SearchForHistory" type="button" class="btn btn-primary">搜索</button>
+            <button id="SearchForHistory" type="button" class="btn btn-primary search">搜索</button>
+            <button id="StatusSwitch" type="button" class="btn btn-primary">暂停</button>
             <p class="page-header"></p>
           </div>
 
-          <div id="container_dynamic_l" class="container" style="height: 400px; width: 525px"></div>
           <div id="container_dynamic_r" class="container" style="height: 400px; width: 525px"></div>
-          <div id="container_search_l" class="container divInvisible" style="height: 400px; width: 525px"></div>
           <div id="container_search_r" class="container divInvisible" style="height: 400px; width: 525px"></div>
+          <div id="records_dynamic_l">
+            <table id="dynamicRecords" class="display" cellspacing="0" width="100%">
+              <thead>
+                <tr>
+                  <th>发生时间</th>
+                  <th>设备</th>
+                  <th>健康状态异常预测</th>
+                  <th>判断依据</th>
+                </tr>
+              </thead>
+              <tbody id="Record">
 
+              </tbody>
+            </table>
+          </div>
+          
+          
+          
 
         </div>
 

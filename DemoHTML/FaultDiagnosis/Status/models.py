@@ -107,7 +107,11 @@ class Log(models.Model):
 	# 0
 	PublicationDate = models.DateTimeField('date published');
 	# 1
+	ErrorEquipment = models.TextField(default="");
+	# 2
 	LogInformation = models.TextField(default="");
+	# 3
+	Reason = models.TextField(default="");
 
 
 

@@ -39,31 +39,38 @@ class MainBlock(object):
 
 			if self._2[index][1] == 1 and self._3[index][1] < threshold and self._7[index][1] == 0:
 				if self._32[index][1] == 0:
-					self._output.append([self._32[index][0],0,'正常']);
+					self._output.append([self._32[index][0],0,'正常','引导阀','无']);
 				else:
-					self._output.append([self._32[index][0],1,'引导阀工作不正常，有发卡情况']);
+					self._output.append([self._32[index][0],1,'引导阀工作不正常','引导阀','引导阀发卡']);
 
 			else:
-				self._output.append([self._32[index][0],0,'正常']);
+				self._output.append([self._32[index][0],0,'正常','引导阀','无']);
 
-
-		print self._output
 
 
 		# edit log
 		log_record = list();
 		for index in xrange(len(self._output)):
 			if index == 0 and self._output[index][1] == 1:
-				log_record.append([self._output[index][0],self._output[index][2]]);
-			elif index == 0 and self._output[index][1] == 0:
+				log_record.append([self._output[index][0],self._output[index][2],self._output[index][3],self._output[index][4]]);
+			else:
 				continue;
 
 			if self._output[index][1] == 1 and self._output[index-1][1] == 0:
-				log_record.append([self._output[index][0],self._output[index][2]]);
+				log_record.append([self._output[index][0],self._output[index][2],self._output[index][3],self._output[index][4]]);
 			elif self._output[index][1] == 1 and self._output[index-1][1] == 1 and self._output[index][2] != self._output[index-1][2]:
-				log_record.append([self._output[index][0],self._output[index][2]]);
+				log_record.append([self._output[index][0],self._output[index][2],self._output[index][3],self._output[index][4]]);
 
-		print log_record
+
+		# input log
+		database = MySQLdb.connect('localhost','root','qwert','FaultDiagnosis');
+		with database:
+			cursor = database.cursor();
+			for index in xrange(len(log_record)):
+				cursor.execute('INSERT into Status_log(PublicationDate,LogInformation,ErrorEquipment,Reason) values(\'{0}\',\'{1}\',\'{2}\',\'{3}\')'.format(log_record[index][0],log_record[index][1],log_record[index][2],log_record[index][3]));
+				database.commit();
+			cursor.close();
+		database.close();
 
 
 		# input analysis
@@ -76,15 +83,6 @@ class MainBlock(object):
 			cursor.close();
 		database.close();
 
-		# input log
-		database = MySQLdb.connect('localhost','root','qwert','FaultDiagnosis');
-		with database:
-			cursor = database.cursor();
-			for index in xrange(len(log_record)):
-				cursor.execute('INSERT into Status_log(PublicationDate,LogInformation) values(\'{0}\',\'{1}\')'.format(log_record[index][0],log_record[index][1]));
-				database.commit();
-			cursor.close();
-		database.close();
 
 
 def main():

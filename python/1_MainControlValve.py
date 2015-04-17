@@ -40,20 +40,20 @@ class MainBlock(object):
 		# analyze feature
 		for index in xrange(len(self._17)):
 			if self._15[index][1] == 0 and self._17[index][1] != 0:
-				self._output.append([self._17[index][0],1,'主配零位漂移']);
+				self._output.append([self._17[index][0],1,'主配零位漂移','主配压阀','接力器与调节器输出信号有偏差']);
 			
 			elif index >= 5:
 				globalK = np.abs((self._6[0][1] - self._6[index][1])/float(index/100.0));
 				localK = np.abs((self._6[index-1][1] - self._6[index][1])/float(1/100.0));
 				if globalK > threshold and localK > threshold:
-					self._output.append([self._6[index][0],1,'主配关闭最大行程变化']);
+					self._output.append([self._6[index][0],1,'主配关闭最大行程变化','主配压阀','导叶快关段最快关闭时间缩短']);
 				elif np.abs(globalK - localK) > 0.2:
-					self._output.append([self._6[index][0],1,'主配关闭最大行程变化']);
+					self._output.append([self._6[index][0],1,'主配关闭最大行程变化','主配压阀','主配关闭过程有卡顿或突变']);
 				else:
-					self._output.append([self._6[index][0],0,'正常']);
+					self._output.append([self._6[index][0],0,'正常','主配压阀','无']);
 
 			else:
-				self._output.append([self._6[index][0],0,'正常']);
+				self._output.append([self._6[index][0],0,'正常','主配压阀','无']);
 
 
 		# print self._output
@@ -62,17 +62,23 @@ class MainBlock(object):
 		# edit log
 		log_record = list();
 		for index in xrange(len(self._output)):
-			if index == 0 and self._output[index][1] == 1:
-				log_record.append([self._output[index][0],self._output[index][2]]);
-			elif index == 0 and self._output[index][1] == 0:
+			if index == 0:
 				continue;
 
 			if self._output[index][1] == 1 and self._output[index-1][1] == 0:
-				log_record.append([self._output[index][0],self._output[index][2]]);
+				log_record.append([self._output[index][0],self._output[index][2],self._output[index][3],self._output[index][4]]);
 			elif self._output[index][1] == 1 and self._output[index-1][1] == 1 and self._output[index][2] != self._output[index-1][2]:
-				log_record.append([self._output[index][0],self._output[index][2]]);
+				log_record.append([self._output[index][0],self._output[index][2],self._output[index][3],self._output[index][4]]);
 
-		# print log_record
+		# input log
+		database = MySQLdb.connect('localhost','root','qwert','FaultDiagnosis');
+		with database:
+			cursor = database.cursor();
+			for index in xrange(len(log_record)):
+				cursor.execute('INSERT into Status_log(PublicationDate,LogInformation,ErrorEquipment,Reason) values(\'{0}\',\'{1}\',\'{2}\',\'{3}\')'.format(log_record[index][0],log_record[index][1],log_record[index][2],log_record[index][3]));
+				database.commit();
+			cursor.close();
+		database.close();
 
 
 		# input analysis
@@ -85,15 +91,6 @@ class MainBlock(object):
 			cursor.close();
 		database.close();
 
-		# input log
-		database = MySQLdb.connect('localhost','root','qwert','FaultDiagnosis');
-		with database:
-			cursor = database.cursor();
-			for index in xrange(len(log_record)):
-				cursor.execute('INSERT into Status_log(PublicationDate,LogInformation) values(\'{0}\',\'{1}\')'.format(log_record[index][0],log_record[index][1]));
-				database.commit();
-			cursor.close();
-		database.close();
 
 
 def main():

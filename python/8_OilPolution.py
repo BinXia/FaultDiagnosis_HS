@@ -35,29 +35,35 @@ class MainBlock(object):
 		# analyze feature
 		for index in xrange(len(self._29)):
 			if self._29[index][1] > threshold['Turbid']:
-				self._output.append([self._29[index][0],1,'油中混水']);
+				self._output.append([self._29[index][0],1,'油中混水','油质污染','油中混水超标']);
 			elif self._30[index][1] > threshold['Impurity']:
-				self._output.append([self._29[index][0],1,'杂质颗粒度过多']);
+				self._output.append([self._29[index][0],1,'杂质颗粒度过多','油质污染','杂质颗粒度过多']);
 			else:
-				self._output.append([self._29[index][0],0,'正常']);
+				self._output.append([self._29[index][0],0,'正常','油质污染','无']);
 
-		print self._output
+		# print self._output
 
 
 		# edit log
 		log_record = list();
 		for index in xrange(len(self._output)):
-			if index == 0 and self._output[index][1] == 1:
-				log_record.append([self._output[index][0],self._output[index][2]]);
-			elif index == 0 and self._output[index][1] == 0:
+			if index == 0:
 				continue;
 
 			if self._output[index][1] == 1 and self._output[index-1][1] == 0:
-				log_record.append([self._output[index][0],self._output[index][2]]);
+				log_record.append([self._output[index][0],self._output[index][2],self._output[index][3],self._output[index][4]]);
 			elif self._output[index][1] == 1 and self._output[index-1][1] == 1 and self._output[index][2] != self._output[index-1][2]:
-				log_record.append([self._output[index][0],self._output[index][2]]);
+				log_record.append([self._output[index][0],self._output[index][2],self._output[index][3],self._output[index][4]]);
 
-		print log_record
+		# input log
+		database = MySQLdb.connect('localhost','root','qwert','FaultDiagnosis');
+		with database:
+			cursor = database.cursor();
+			for index in xrange(len(log_record)):
+				cursor.execute('INSERT into Status_log(PublicationDate,LogInformation,ErrorEquipment,Reason) values(\'{0}\',\'{1}\',\'{2}\',\'{3}\')'.format(log_record[index][0],log_record[index][1],log_record[index][2],log_record[index][3]));
+				database.commit();
+			cursor.close();
+		database.close();
 
 
 		# input analysis
@@ -70,15 +76,7 @@ class MainBlock(object):
 			cursor.close();
 		database.close();
 
-		# input log
-		database = MySQLdb.connect('localhost','root','qwert','FaultDiagnosis');
-		with database:
-			cursor = database.cursor();
-			for index in xrange(len(log_record)):
-				cursor.execute('INSERT into Status_log(PublicationDate,LogInformation) values(\'{0}\',\'{1}\')'.format(log_record[index][0],log_record[index][1]));
-				database.commit();
-			cursor.close();
-		database.close();
+		
 
 
 def main():
