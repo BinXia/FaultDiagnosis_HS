@@ -157,7 +157,7 @@ def RecordForHistory(request):
 		currentTime = int(request.GET['currentTime']);
 		respondData = list();
 
-		database = MySQLdb.connect('localhost','root','qwert','FaultDiagnosis');
+		database = MySQLdb.connect('localhost','root','qwert','FaultDiagnosis',charset='utf8');
 		with database:
 			cursor = database.cursor();
 			if currentTime == 0:
