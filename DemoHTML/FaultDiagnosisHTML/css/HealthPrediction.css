@@ -1,17 +1,17 @@
 .li-pos{
-	background-image: url(../images/pos.png);
+	background-image: url(../img/pos.png);
     background-repeat: no-repeat;
     background-position:center;
 }
 
 .li-neg{
-	background-image: url(../images/neg.png);
+	background-image: url(../img/neg.png);
     background-repeat: no-repeat;
     background-position:center;
 }
 
 .li-unknown{
-	background-image: url(../images/unknown.png);
+	background-image: url(../img/unknown.png);
     background-repeat: no-repeat;
     background-position:center;
 }

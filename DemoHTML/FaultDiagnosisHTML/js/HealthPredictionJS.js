@@ -205,9 +205,7 @@ $(function () {
         //Unlock the button and Reset isSearch
         $(this).attr('disabled', false);
         isSearch = true;
-
     });
-
 
     $(".liLeft").click(function(){
         // initialize

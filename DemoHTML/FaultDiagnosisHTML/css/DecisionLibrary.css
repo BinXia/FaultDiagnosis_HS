@@ -1,0 +1,33 @@
+.divInvisible{
+    display: none;
+}
+
+
+
+html, body {
+    font: 10pt arial;
+}
+    
+#RelationStructure {
+    width: 700px;
+    height:600px;
+    border: 1px solid lightgray;
+} 
+
+
+/*div.dataTables_wrapper {
+    width: 100%;
+}*/
+
+
+#tableList{
+    float: left;
+}
+
+#RelationStructure{
+    float: right;
+}
+
+/*.toolbar {
+    float: center;
+}*/
