@@ -36,8 +36,8 @@ $(function () {
     //Get all the data from the database
     var sensor_all,
         prediction_all,
-        log_all,
-        log_all_backup;
+        log_all = [],
+        log_all_backup = [];
     url = urlPrefix + "/HealthPrediction/Dynamic";
     $.ajaxSettings.async = false;
     $.getJSON(url,{"type":"multiple_all","id":1,"data":1800},function(data){
@@ -49,6 +49,7 @@ $(function () {
     url = urlPrefix + "/HealthPrediction/HistoryRecord";
     $.getJSON(url,{"currentTime":0},function(data){
         log_all = data;
+        alert(data);
         log_all_backup = data;
     });
 
