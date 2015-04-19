@@ -1,6 +1,4 @@
-CREATE DATABASE  IF NOT EXISTS `FaultDiagnosis` /*!40100 DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci */;
-USE `FaultDiagnosis`;
--- MySQL dump 10.13  Distrib 5.6.19, for osx10.7 (i386)
+-- MySQL dump 10.13  Distrib 5.6.22, for osx10.10 (x86_64)
 --
 -- Host: localhost    Database: FaultDiagnosis
 -- ------------------------------------------------------
@@ -170,4 +168,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-04-19 17:02:00
+-- Dump completed on 2015-04-19 17:06:36
