@@ -12,34 +12,47 @@ $(function () {
 		Equipments_table;
 
 	var createHealthFigure = function() {
-		// Instantiate our network object.
-		var container = document.getElementById('RelationStructure');
-		var data = {
-			nodes: nodes,
-			edges: edges
-		};
-		var options = {
-			// stabilize: false,   // stabilize positions before displaying
-			nodes: {
-	          radiusMin: 16,
-	          radiusMax: 32,
-	          fontColor: '#2B1B17'
-	        },
-			edges: {
-				color: '#A0A0A0'
-			},
-			groups: {
-	          equipments: {
-	            shape: 'triangle',
-	            color: '#FF9900'
-	          },
-	          parameters: {
-	            shape: 'dot',
-	          }
-	        }
-		};
-		network = new vis.Network(container, data, options);
-	}
+			// Instantiate our network object.
+			var container = document.getElementById('RelationStructure');
+			var data = {
+				nodes: nodes,
+				edges: edges
+			};
+			var options = {
+				// stabilize: false,   // stabilize positions before displaying
+				nodes: {
+		          radiusMin: 16,
+		          radiusMax: 32,
+		          fontColor: '#2B1B17'
+		        },
+				edges: {
+					color: '#A0A0A0'
+				},
+				groups: {
+		          equipments: {
+		            shape: 'triangle',
+		            color: '#FF9900'
+		          },
+		          parameters: {
+		            shape: 'dot',
+		          }
+		        }
+			};
+			network = new vis.Network(container, data, options);
+		},
+		createTables = function() {
+			var outerDIV = $("<div>",{id:"tableList"});
+			var tableHead = $("<thead></thead>");
+			var equ_table = $("<table>",{id:"EquipmentsList",class:"display",cellspacing:"0",width:"300px"});
+	        var equ_record = $("<tbody>",{id:"Equ_Record"});
+	        var par_table = $("<table>",{id:"ParametersList",class:"display",cellspacing:"0",width:"300px"});
+	        var par_record = $("<tbody>",{id:"Par_Record"});
+	        equ_table.append(tableHead).append(equ_record);
+	        par_table.append(tableHead).append(par_record);
+	        outerDIV.append(equ_table).append(par_table);
+	        $("#displayArea").append(outerDIV);
+		}
+
 
 
 	$('#ParametersList tbody').on('click', 'tr', function () {
@@ -56,7 +69,7 @@ $(function () {
         network.selectNodes([point]);
     });
 
-    $('#EquipmentsList tbody').on('click', 'tr', function () {
+    $('#Equ_Record').on('click', 'tr', function () {
         var point = parseInt($('td', this).eq(0).text()) + 100;
         var options = {
             // position: {x:positionx,y:positiony}, // this is not relevant when focusing on nodes
@@ -73,14 +86,23 @@ $(function () {
 
 	$(".liLeft").click(function(){
 		// initialize
-		var count,
-			Parameters;
+		var Equipments_count,
+			Equipments,
+			Equipments_details,
+			Parameters_count,
+			Parameters,
+			Parameters_details,
+			Relationship = [];
+		nodes = [];
+		edges = [];
 		$(".liLeft").each(function(){
             $(this).removeClass("active");
         });
         $(this).addClass("active");
-
-
+        if (Parameters_table) {Parameters_table.clear();};
+        if (Equipments_table) {Equipments_table.clear();};
+        // if ($("#tableList")) {$("#tableList").remove();};
+        // createTables();
 
 
 
@@ -224,10 +246,12 @@ $(function () {
                             "bFilter": false,
                             "scrollY": "250px",
 					        "scrollCollapse": true,
-					        "paging": false
-                            // "dom": '<"toolbar">frtip'
+					        "paging": false,
+					        "aoColumns": [
+					            { "sTitle": "参数编号", "sClass": "right"},
+					            { "sTitle": "名称", "sClass": "left"}
+					        ]
                         });
-		// $("div.toolbar").html('<h4>相关参数指标列表</h4>');
 
 
 

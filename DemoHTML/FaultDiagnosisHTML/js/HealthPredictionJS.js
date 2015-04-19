@@ -7,7 +7,9 @@ $(function () {
 
     //Dynamic: $(".liLeft").click
     var chartDynamicSensor,
-        intervalFUnctionSensor,
+        chartDynamicPrediction,
+        intervalFunctionSensor,
+        intervalFunctionPrediction,
         startID_prediction = 91,
         startID_sensor = 91,
         intialDataNum = 90,
@@ -17,8 +19,11 @@ $(function () {
                             "bDestroy": true,
                             "iDisplayLength" : 5,
                             "order": [[ 0, "desc" ]],
-                            "stateSave": true
+                            "stateSave": true,
+                            "autoWidth": false,
+                            "scrollX": true
                         });
+
 
     //Search: $(".btn-primary").click
     var chartSearchSensor,
@@ -47,7 +52,6 @@ $(function () {
         log_all_backup = data;
     });
 
-
     // Convert timestamp to MySql Datetime
     Date.prototype.toDATETIME = function() {
         this.setHours(this.getHours());
@@ -63,10 +67,10 @@ $(function () {
     $("#StatusSwitch").click(function(){
         isPause = !isPause;
         if (isPause) {
-            $(this).text("开始");
+            $(this).text("点击这里继续");
         }
         else{
-            $(this).text("暂停");
+            $(this).text("点击这里暂停");
         };
     });
 
@@ -75,8 +79,6 @@ $(function () {
         isSearch = false;
         $(".search").click();
     });
-
-
 
     //搜索相应时段信息
     $(".search").click(function(){
@@ -209,13 +211,13 @@ $(function () {
 
     $(".liLeft").click(function(){
         // initialize
-        var chartTitle,
-            chartSubTitle = "实时数据",
+        var chartSubTitle = "实时数据",
             multipleChartTitle = "相关参数反馈",
             seriesOptions = [],
             seriesCounter = 0,
             itemNO,                    //The selection of prediction datum for the display
             itemName,
+            name_en_Prediction = ['FenDuanGuanBiZhuangZhi_1','JieLiQiFanKui_2','ShiGuPeiYaFa_3','YouBengDianJi_4','ZhuPeiYaFa_5','ZhuJieLiQi_6','YouZhiWuRan_7','WuYouDianZhuan_8','YinDaoFa_9','ZuHeFa_10','YouBeng_11'],
             names = [],
             names_en = [],
             names_i = [],
@@ -232,11 +234,16 @@ $(function () {
         //Clear previous chart
         $("#container_search_r").addClass("divInvisible");
         $("#records_dynamic_l").removeClass("divInvisible");
+        $("#container_dynamic_l").removeClass("divInvisible");
         $("#container_dynamic_r").removeClass("divInvisible");
         $("#searchArea").removeClass("divInvisible");
         if (chartDynamicSensor) {
             clearInterval(intervalFunctionSensor);
             chartDynamicSensor.destroy();
+        };
+        if (chartDynamicPrediction) {
+            clearInterval(intervalFunctionPrediction);
+            chartDynamicPrediction.destroy();
         };
         $("#historicRecord_wrapper").remove();
         reinitialize.clear();
@@ -329,8 +336,7 @@ $(function () {
         }
 
 
-
-        //Get the Sensor data for the initialization
+        //Get the Sensor and Prediction data for the initialization
         seriesCounter = names_en.length;
         for (var i = 0; i <= seriesCounter - 1; i++) {
             $.ajaxSettings.async = false;
@@ -342,15 +348,16 @@ $(function () {
             });
         };
         startID_sensor = startID_sensor + 1;
-        
-        //Sensor chart options
-        chartDynamicSensor = new Highcharts.StockChart({
-            chart : {
-                renderTo: 'container_dynamic_r',
-                type: 'spline',
-                // animation: Highcharts.svg,
+
+
+        //Prediction chart options
+        chartDynamicPrediction = new Highcharts.StockChart({
+            chart: {
+                renderTo: 'container_dynamic_l',
+                alignTicks: false,
                 events : {
                     load : function () {
+                        var series = this.series[0];
                         intervalFunctionSensor = setInterval(function () {
                             if (!isPause){
                                 // update prediction
@@ -371,8 +378,77 @@ $(function () {
                                         $(this).addClass("li-unknown");
                                     }
                                 });
+                                var point = [prediction_all[startID_prediction-1][0],prediction_all[startID_prediction-1][itemNO]];
+                                series.addPoint(point,true,true);
                                 startID_prediction = startID_prediction + 1;
 
+                            }
+                        }, 1000);
+                    }
+                }
+            },
+
+            rangeSelector: {
+                buttons: [{
+                    count: 1,
+                    type: 'minute',
+                    text: '1M'
+                },{
+                    type: 'all',
+                    text: 'All'
+                }],
+                inputEnabled: false,
+                selected: 0
+            },
+
+            title : {
+                text : itemName
+            },
+            subtitle: {
+                text : chartSubTitle
+            },
+            exporting: {
+                enabled: false
+            },
+            tooltip: {
+                pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}</b><br/>',
+                valueDecimals: 2
+            },
+            plotOptions: {
+                series: {
+                    borderColor: '#303030'
+                }
+            },
+            series: [{
+                type: 'column',
+                name : itemName,
+                color: '#FF0000',
+                data : (function () {
+                    var data = [];
+                    // $.ajaxSettings.async = false;
+                    $.getJSON(url,{"type":"single","id":startID_prediction-intialDataNum,"data":intialDataNum},function(dataSeries){
+                        for (var i = 1; i <= dataSeries.length; i++) {
+                            if ((i%11)==itemNO) {
+                                data.push(dataSeries[i-1]);
+                            };
+                        };
+                    });
+                    startID_prediction = startID_prediction + 1;
+                    return data;
+                }())
+            }]
+        });
+        
+        //Sensor chart options
+        chartDynamicSensor = new Highcharts.StockChart({
+            chart : {
+                renderTo: 'container_dynamic_r',
+                type: 'spline',
+                // animation: Highcharts.svg,
+                events : {
+                    load : function () {
+                        intervalFunctionSensor = setInterval(function () {
+                            if (!isPause){
                                 // update related parameters
                                 for (var i = 0; i <= seriesCounter - 1; i++) {
                                     // set up the updating of the chart each second
@@ -386,7 +462,7 @@ $(function () {
                                 // update log
                                 reinitialize.destroy();
                                 for (var i = log_all.length-1; i >= 0 ; i--) {
-                                    if ((log_all[i][0]*1000) < TIMENOW) {
+                                    if ((log_all[i][0]*1000) <= TIMENOW) {
                                         if (log_all[i][1] == itemName) {
                                             var time = new Date(log_all[i][0]*1000);
                                             time.toDATETIME();
@@ -407,7 +483,9 @@ $(function () {
                                     "bDestroy": true,
                                     "iDisplayLength" : 5,
                                     "order": [[ 0, "desc" ]],
-                                    "stateSave": true
+                                    "stateSave": true,
+                                    "autoWidth": false,
+                                    "scrollX": true
                                 });
 
                             }
@@ -458,6 +536,7 @@ $(function () {
         //Clear previous chart
         $("#records_dynamic_l").addClass("divInvisible");
         $("#container_search_r").addClass("divInvisible");
+        $("#container_dynamic_l").addClass("divInvisible");
         $("#container_dynamic_r").addClass("divInvisible");
         $("#searchArea").addClass("divInvisible");
         $("#historicRecord_wrapper").remove();

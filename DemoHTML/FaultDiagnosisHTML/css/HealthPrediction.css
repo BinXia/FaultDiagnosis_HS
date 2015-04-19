@@ -25,3 +25,9 @@
 .divInvisible{
     display: none;
 }
+
+/*th, td { white-space: nowrap; }
+div.dataTables_wrapper {
+    width: 500px;
+    margin: 0 auto;
+}*/
