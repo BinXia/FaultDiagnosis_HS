@@ -17,14 +17,15 @@
     <link href="./css/Bootstrap/bootstrap.min.css" rel="stylesheet">
 
     <!-- My own CSS -->
-    <link href="./css/HealthPrediction.css" rel="stylesheet">
+    <link href="./css/FaultDiagnosis.css" rel="stylesheet">
     <link href="./css/Datatables/jquery.dataTables.css" rel="stylesheet">
+
 
     <!-- Custom styles for this template -->
     <link href="./css/Bootstrap/dashboard.css" rel="stylesheet">
 
 
-   
+    
   </head>
 
   <body>
@@ -44,8 +45,8 @@
           <ul class="nav navbar-nav">
             <li><a href="#"><font size="2">运行监测</font></a></li>
             <li><a href="#"><font size="2">控制操作</font></a></li>
-            <li class="active"><a href="HealthPrediction.html"><font size="2">健康预测</font></a></li>
-            <li><a href="FaultDiagnosis.html"><font size="2">故障诊断</font></a></li>
+            <li><a href="HealthPrediction.html"><font size="2">健康预测</font></a></li>
+            <li class="active"><a href="FaultDiagnosis.html"><font size="2">故障诊断</font></a></li>
             <li><a href="DecisionLibrary.html"><font size="2">决策知识库</font></a></li>
           </ul>
         </div>
@@ -57,9 +58,9 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
-          <h4 class="text-center">健康状态预测结果</h4>
+          <h4 class="text-center">故障诊断与分析</h4>
           <ul class="nav nav-sidebar">
-            <li id="item01" class="text-center liLeft"><a class="li-unknown aLeft" href="#item01">分段关闭装置</a></li>
+            <li id="item01" class="text-center liLeft"><a class="li-unknown aLeft" href="#item01">接力器</a></li>
             <li id="item02" class="text-center liLeft"><a class="li-unknown aLeft" href="#item02">接力器反馈</a></li>
             <li id="item03" class="text-center liLeft"><a class="li-unknown aLeft" href="#item03">事故配压阀</a></li>
             <li id="item04" class="text-center liLeft"><a class="li-unknown aLeft" href="#item04">油泵电机</a></li>
@@ -87,9 +88,6 @@
             <button id="StatusSwitch" type="button" class="btn btn-primary" style="float: right">点击这里暂停</button>
             <p class="page-header"></p>
           </div>
-
-          <div id="container_dynamic_l" class="container" style="height: 400px; width: 525px"></div>
-          <div id="container_dynamic_r" class="container" style="height: 400px; width: 525px"></div>
           
           <div id="records_dynamic_l">  <!-- style="float: left" -->
             <table id="dynamicRecords" class="display" cellspacing="0">
@@ -105,12 +103,7 @@
 
               </tbody>
             </table>
-          </div>
-
-          <div id="container_search_r" class="container divInvisible" style="height: 400px; width: 100%"></div>
-          <!-- ; width: 525px -->
-          
-          
+          </div>          
 
         </div>
 
@@ -128,7 +121,7 @@
     <script src="./js/Bootstrap/ie10-viewport-bug-workaround.js"></script>
     <!-- My core JavaScript
     ================================================== -->
-    <script src="./js/HealthPredictionJS.js"></script>
+    <script src="./js/FaultDiagnosisJS.js"></script>
     <script src="./js/Highcharts/highstock.js"></script>
     <script src="./js/Highcharts/exporting.js"></script>
     <script src="./js/Datatables/jquery.dataTables.min.js"></script>

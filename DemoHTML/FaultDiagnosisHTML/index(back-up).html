@@ -9,71 +9,57 @@
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="icon" href="./images/title.ico">
+    <link rel="icon" href="./img/title.ico">
 
     <title>古田溪二级调速器在线监测</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
-    <script src="./js/ie-emulation-modes-warning.js"></script>
+    <link href="./css/Bootstrap/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="./css/carousel.css" rel="stylesheet">
+    <link href="./css/Bootstrap/carousel.css" rel="stylesheet">
+    <!-- <link href="./css/Bootstrap/freelancer.css" rel="stylesheet"> -->
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./js/jquery.min.js"></script>
-    <script src="./js/bootstrap.min.js"></script>
+    <script src="./js/jquery-2.1.3.min.js"></script>
+    <script src="./js/jquery.easing.min.js"></script>
+    <script src="./js/Bootstrap/bootstrap.min.js"></script>
     <!-- Just to make our placeholder images work. Don't actually copy the next line! -->
-    <script src="./js/holder.js"></script>
+    <script src="./js/Bootstrap/holder.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="./js/ie10-viewport-bug-workaround.js"></script>
+    <script src="./js/Bootstrap/ie10-viewport-bug-workaround.js"></script>
+    <!-- Bin JS -->
+    <script src="./js/Bootstrap/freelancer.js"></script>
+
   </head>
 
 <!-- NAVBAR
 ================================================== -->
-  <body>
-    <div class="navbar-wrapper">
+  <body id="page-top" class="index">
+    <nav class="navbar navbar-fixed-top navbar-inverse">
       <div class="container">
+        <div class="navbar-header page-scroll">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#page-top">古田溪二级调速器在线监测</a>
+        </div>
 
-        <nav class="navbar navbar-inverse navbar-static-top">
-          <div class="container">
-            <div class="navbar-header">
-              <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-              </button>
-              <a class="navbar-brand" href="./Carousel Template for Bootstrap_files/Carousel Template for Bootstrap.html">古田溪二级调速器在线监测</a>
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
-              <ul class="nav navbar-nav">
-                <li class="active"><a href="./Carousel Template for Bootstrap_files/Carousel Template for Bootstrap.html">Home</a></li>
-                <li><a href="http://getbootstrap.com/examples/carousel/#about">About</a></li>
-                <li><a href="http://getbootstrap.com/examples/carousel/#contact">Contact</a></li>
-                <li class="dropdown">
-                  <a href="./Carousel Template for Bootstrap_files/Carousel Template for Bootstrap.html" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="./Carousel Template for Bootstrap_files/Carousel Template for Bootstrap.html">Action</a></li>
-                    <li><a href="./Carousel Template for Bootstrap_files/Carousel Template for Bootstrap.html">Another action</a></li>
-                    <li><a href="./Carousel Template for Bootstrap_files/Carousel Template for Bootstrap.html">Something else here</a></li>
-                    <li class="divider"></li>
-                    <li class="dropdown-header">Nav header</li>
-                    <li><a href="./Carousel Template for Bootstrap_files/Carousel Template for Bootstrap.html">Separated link</a></li>
-                    <li><a href="./Carousel Template for Bootstrap_files/Carousel Template for Bootstrap.html">One more separated link</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav>
-
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="page-scroll"><a href="#page-top">Home</a></li>
+            <li class="page-scroll"><a href="#heheda">About</a></li>
+            <li class="page-scroll"><a href="#contact">Contact</a></li>
+          </ul>
+        </div>
       </div>
-    </div>
+    </nav>
 
 
     <!-- Carousel
@@ -81,38 +67,38 @@
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
       <!-- Indicators -->
       <ol class="carousel-indicators">
-        <li data-target="#myCarousel" data-slide-to="0" class=""></li>
-        <li data-target="#myCarousel" data-slide-to="1" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+        <li data-target="#myCarousel" data-slide-to="1" class=""></li>
         <li data-target="#myCarousel" data-slide-to="2" class=""></li>
       </ol>
       <div class="carousel-inner" role="listbox">
-        <div class="item">
-          <img class="first-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="First slide">
-          <div class="container">
-            <div class="carousel-caption">
-              <h1>Example headline.</h1>
-              <p>Note: If you're viewing this page via a <code>file://</code> URL, the "next" and "previous" Glyphicon buttons on the left and right might not load/display properly due to web browser security rules.</p>
-              <p><a class="btn btn-lg btn-primary" href="./Carousel Template for Bootstrap_files/Carousel Template for Bootstrap.html" role="button">Sign up today</a></p>
-            </div>
-          </div>
-        </div>
         <div class="item active">
-          <img class="second-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Second slide">
+          <img class="first-slide" src="" alt="First slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>Another example headline.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="./Carousel Template for Bootstrap_files/Carousel Template for Bootstrap.html" role="button">Learn more</a></p>
+              <h1>Example1</h1>
+              <p>Text</p>
+              <p><a class="btn btn-lg btn-primary" href="" role="button">Touch Me!</a></p>
             </div>
           </div>
         </div>
         <div class="item">
-          <img class="third-slide" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Third slide">
+          <img class="second-slide" src="" alt="Second slide">
           <div class="container">
             <div class="carousel-caption">
-              <h1>One more for good measure.</h1>
-              <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-              <p><a class="btn btn-lg btn-primary" href="./Carousel Template for Bootstrap_files/Carousel Template for Bootstrap.html" role="button">Browse gallery</a></p>
+              <h1>Example2</h1>
+              <p>Text</p>
+              <p><a class="btn btn-lg btn-primary" href="" role="button">Touch Me!</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="item">
+          <img class="third-slide" src="">
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>Example3</h1>
+              <p>Text</p>
+              <p><a class="btn btn-lg btn-primary" href="" role="button">Touch Me!</a></p>
             </div>
           </div>
         </div>
@@ -161,7 +147,7 @@
 
       <hr class="featurette-divider">
 
-      <div class="row featurette">
+      <div id="heheda" class="row featurette">
         <div class="col-md-7">
           <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
           <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
@@ -202,7 +188,7 @@
 
       <!-- FOOTER -->
       <footer>
-        <p class="pull-right"><a href="#">回到顶部</a></p>
+        <p class="pull-right"><a href="#">TOP</a></p>
         <p>© 2015</p>
       </footer>
 

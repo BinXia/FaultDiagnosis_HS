@@ -99,8 +99,8 @@ $(function () {
             $(this).removeClass("active");
         });
         $(this).addClass("active");
-        if (Parameters_table) {Parameters_table.clear();};
-        if (Equipments_table) {Equipments_table.clear();};
+        // if (Parameters_table) {Parameters_table.clear();};
+        // if (Equipments_table) {Equipments_table.clear();};
         // if ($("#tableList")) {$("#tableList").remove();};
         // createTables();
 

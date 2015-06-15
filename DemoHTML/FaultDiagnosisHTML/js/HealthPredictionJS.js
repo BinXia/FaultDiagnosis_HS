@@ -16,8 +16,8 @@ $(function () {
         isPause = false,
         reinitialize,
         reinitialize = $('#dynamicRecords').DataTable({
-                            "bDestroy": true,
                             "iDisplayLength" : 5,
+                            "deferRender": true,
                             "order": [[ 0, "desc" ]],
                             "stateSave": true,
                             "autoWidth": false,
@@ -49,7 +49,6 @@ $(function () {
     url = urlPrefix + "/HealthPrediction/HistoryRecord";
     $.getJSON(url,{"currentTime":0},function(data){
         log_all = data;
-        alert(data);
         log_all_backup = data;
     });
 
@@ -481,8 +480,8 @@ $(function () {
                                 };
 
                                 reinitialize = $('#dynamicRecords').DataTable({
-                                    "bDestroy": true,
                                     "iDisplayLength" : 5,
+                                    "deferRender": true,
                                     "order": [[ 0, "desc" ]],
                                     "stateSave": true,
                                     "autoWidth": false,
@@ -566,7 +565,10 @@ $(function () {
         });
         $('#displayArea').append(table);
         $('#historicRecord').DataTable({
-            "order": [[ 0, "desc" ]]
+            "deferRender": true,
+            "order": [[ 0, "desc" ]],
+            "stateSave": true,
+            "autoWidth": false,
         });
     });
 
